@@ -3,9 +3,10 @@ package com.r_saiki.springboot.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.r_saiki.springboot.domein.model.User;
@@ -18,7 +19,7 @@ public class UserController {
 	UserService userService;
 
 	// 一件追加用メソッド
-	@RequestMapping("/insert")
+	@PostMapping("/insert")
 	public String insert(@RequestBody User user) {
 		String result = "";
 		if (userService.insert(user))
@@ -29,21 +30,21 @@ public class UserController {
 	}
 
 	// 全件取得用メソッド
-	@RequestMapping("/selectMany")
+	@GetMapping("/selectMany")
 	public List<User> selectMany() {
 		// 全件取得
 		return userService.selectMany();
 	}
 
 	// 1件取得用メソッド
-	@RequestMapping("/selectOne/{id:.+}")
+	@GetMapping("/selectOne/{id:[0-9]+}")
 	public User selectOne(@PathVariable("id") String userId) {
 		// selectOne実行
 		return userService.selectOne(userId);
 	}
 
 	// 1件更新メソッド
-	@RequestMapping("/updateOne")
+	@PostMapping("/updateOne")
 	public String updateOne(@RequestBody User user) {
 		String result = "";
 		if (userService.updateOne(user))
@@ -54,7 +55,7 @@ public class UserController {
 	}
 
 	// 1件削除メソッド
-	@RequestMapping("/deleteOne/{id:.+}")
+	@PostMapping("/deleteOne/{id:.+}")
 	public String deleteOne(@PathVariable("id") String userId) {
 		String result = "";
 		if (userService.deleteOne(userId))

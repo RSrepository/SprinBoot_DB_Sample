@@ -24,7 +24,7 @@ public class UserDaoJdbc implements UserDao {
 		// 1件登録
 		int rowNumber = jdbc.update(
 				"INSERT INTO m_user(user_id," + " password," + " user_name," + " age," + " role)"
-						+ " VALUES(?, ?, ?, ?, ?, ?, ?)",
+						+ " VALUES(?, ?, ?, ?, ?)",
 				user.getUserId(), user.getPassword(), user.getUserName(), user.getAge(), user.getRole());
 		return rowNumber;
 	}
@@ -73,7 +73,7 @@ public class UserDaoJdbc implements UserDao {
 	public int updateOne(User user) throws DataAccessException {
 		// 1件更新
 		int rowNumber = jdbc.update(
-				"UPDATE m_user" + " SET" + " password = ?," + " user_name = ?," + " age = ?," + " WHERE user_id = ?",
+				"UPDATE m_user" + " SET" + " password = ?," + " user_name = ?," + " age = ?" + " WHERE user_id = ?",
 				user.getPassword(), user.getUserName(), user.getAge(), user.getUserId());
 		return rowNumber;
 	}
