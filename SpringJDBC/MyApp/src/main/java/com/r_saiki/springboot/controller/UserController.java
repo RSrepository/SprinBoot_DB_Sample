@@ -3,6 +3,8 @@ package com.r_saiki.springboot.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +19,7 @@ public class UserController {
 
 	// 一件追加用メソッド
 	@RequestMapping("/insert")
-	public String insert(User user) {
+	public String insert(@RequestBody User user) {
 		String result = "";
 		if (userService.insert(user))
 			result = "一件追加しました！";
@@ -34,15 +36,15 @@ public class UserController {
 	}
 
 	// 1件取得用メソッド
-	@RequestMapping("/selectOne")
-	public User selectOne(String userId) {
+	@RequestMapping("/selectOne/{id:.+}")
+	public User selectOne(@PathVariable("id") String userId) {
 		// selectOne実行
 		return userService.selectOne(userId);
 	}
 
 	// 1件更新メソッド
 	@RequestMapping("/updateOne")
-	public String updateOne(User user) {
+	public String updateOne(@RequestBody User user) {
 		String result = "";
 		if (userService.updateOne(user))
 			result = "一件更新しました！";
@@ -52,8 +54,8 @@ public class UserController {
 	}
 
 	// 1件削除メソッド
-	@RequestMapping("/deleteOne")
-	public String deleteOne(String userId) {
+	@RequestMapping("/deleteOne/{id:.+}")
+	public String deleteOne(@PathVariable("id") String userId) {
 		String result = "";
 		if (userService.deleteOne(userId))
 			result = "一件削除しました！";
